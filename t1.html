@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.getJSON demo</title>
+  <style>
+  img {
+    height: 100px;
+    float: left;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<div id="images"></div>
+ 
+<script>
+/* global $ */
+(function() {
+/*  
+  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: "any",    //    tags: "birds",
+    tagmode: "any",
+    format: "json"
+  })
+  .done(function( data ) {
+    $.each( data.items, function( i, item ) {
+      $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+      console.log(item.media)
+      if ( i === 3 ) {
+        return false;
+      }
+    });
+  });
+  */  
+
+
+    $.ajax({
+        type: 'GET',
+//        url: 'https://php1-leonrom.c9users.io/jsonp.php',
+        url: 'http://romleon.rf.gd/jsonp.php',
+        data: {
+            field: 'value12='
+        },
+        dataType: 'jsonp',
+        crossDomain: true,
+    }).done(function(response){
+        console.log(response);
+    }).fail(function(error){
+        console.log(error.statusText);
+    });
+
+//   $.ajax({
+//     url: "http://romleon.rf.gd/jsonp.php",
+//     dataType: "json"
+// //    ,jsonpCallback: "toJsonContainer"
+//   })
+//   .done(function( data ) {
+//         console.log("----------------------");
+//     $.each( data.items, function( i, item ) {
+//       $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+//       console.log(item.media)
+//       if ( i === 3 ) {
+//         return false;
+//       }
+//     });
+//   });
+    
+})();
+</script>
+ 
+</body>
+</html>

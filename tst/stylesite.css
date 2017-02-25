@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#main{
+    background-color:#fff; 
+    width:600px; 
+    margin:0 auto; 
+    overflow:hidden;
+}
+#header {
+    height:70px;
+    background-color: #cc5050;
+    text-align: center;
+}
+#content{
+    background-color:#50cc50;
+    padding:5px; 
+    width:400px; 
+    float:left; 
+    padding-bottom:32000px; 
+    margin-bottom:-32000px;
+}
+#sideright{
+    background-color:#5050cc; 
+    width:190px;
+    float:left; 
+    padding-bottom:32000px; 
+    margin-bottom:-32000px;     
+}
+#footer{
+    background-color:#FFFF00;
+    padding:5px; 
+    clear:both;
+    float:left; 
+    width:100%;
+    text-align: center;
+}
+#header  li { 
+    list-style: none;
+    display: inline; 
+    padding: 10px 20px 0px 10px; 
+}
+#header li a {
+        padding:3px;    /*Поля вокруг надписей основного меню*/
+    text-decoration: none;
+    color: #000;    /* цвет текста*/
+}
+#header li a:hover {
+    text-decoration: none;
+    padding:3px;    /*Поля вокруг надписей основного меню*/
+    text-decoration: none;
+     color:red;    /* цвет текста*/
+}
+#header H1 {
+     font-family:  Times, Tahoma, Arial,Verdana, sans-serif;  
+}
+.coolmenu {    
+    text-align: center;     
+}
+.coolmenu a {
+        font: bold 13px Verdana;    /*Шрифт текста*/
+     padding: 2px;
+    padding-left: 4px;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    border-bottom: 1px dotted #d0d0d0; 
+}
+.coolmenu a:hover {
+        background-color: #cccccc;
+    color: #000000;    
+        color: red; /*Цвет текста при наведении курсора*/
+        text-decoration: none;
+}
+html>body .coolmenu a {
+        width: auto;
+}
