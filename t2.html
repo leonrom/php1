@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery.getJSON demo</title>
+    <style>
+        img {
+            height: 100px;
+            float: left;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+    <script>
+        /* global $ */
+        /* global navigator */
+        function isEmail() {
+
+            var str = document.getElementById("email").value;
+            $.ajax({
+                type: 'GET',
+                //        url: 'https://php1-leonrom.c9users.io/jsonp.php',
+                url: 'http://romleon.rf.gd/jsonp.php',
+                data: {
+                    field: str
+                },
+                dataType: 'jsonp',
+                crossDomain: true,
+            }).done(function(response) {
+                var status = document.getElementById("status");
+                status.innerHTML = "ответ=" + response;
+            }).fail(function(error) {
+                console.log(error.statusText);
+            });
+        }
+
+        function loadPage() {
+            //       document.write(new ActiveXObject("WScript.Network").UserName)
+        }
+
+        function showInfo() {
+            for (var prop in navigator) {
+                if (navigator[prop] instanceof Object || navigator[prop] === '') continue
+                document.writeln(prop + ": " + navigator[prop] + "<br/>")
+            }
+        }
+
+        showInfo()
+    </script>
+</head>
+
+<body onload="loadPage()">
+    <input type="text" id="email"/>
+    <span id="status"></span>
+    <p style="text-align: center">
+        <button onclick="isEmail()">
+            Кнопка с текстом
+        </button>
+    </p>
+</body>
+
+</html>

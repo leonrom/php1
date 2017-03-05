@@ -1,0 +1,131 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test cookj() /</title>
+    <script src="js/cookj.js"></script>
+    <script>
+        'use strict'
+        /* global cookj */
+        // the usual way   -----------------------------------------------------      
+        function saveL() {
+            var val = document.getElementById("tst").value
+            var ls = window.localStorage
+            if (ls) {
+                ls.setItem("tst1", val);
+                console.log('  LS    : save tst1='+val)
+            }else{
+                console.log('? localStorage disabled')
+            }
+            showAll()
+        }
+
+        function saveC() {
+            var val = document.getElementById("tst").value
+            var date = new Date();
+            date.setTime(date.getTime() + (24 * 60 * 60 * 1000))
+            var str = date.toUTCString();
+            document.cookie = "tst1=" + val + "; expires=" + str + "; path=/";
+            console.log('  Cookie: save tst1='+val)
+            showAll()
+        }
+        
+        // show results  -----------------------------------------------------
+        function readLast() {  // read value for key from field with id="key" 
+            var key = document.getElementById("key").value
+            var dat
+            if (document.getElementById("conly").checked){
+                dat = cookj(key, undefined, true)
+            }else{
+                dat = cookj(key)
+            }
+            var val = JSON.stringify(dat)
+            document.getElementById("rez").innerHTML = val
+            console.log('  last stored: key='+key+', JSON->'+val)
+        }
+
+        function showAll_LS() {
+            var ls = window.localStorage
+            var i = ls.length
+            var s = ""
+            while (i-- > 0){
+                var key = ls.key(i)
+                var val = ls.getItem(key)
+                s += i + '. ' + key + ' -> ' + val + '<br/>'
+            }
+            document.getElementById("div-LS").innerHTML += s
+        }
+
+        function showAll_Ck() {
+            var cookies = document.cookie.split(";")
+            var i = cookies.length
+            while (i-- > 0){
+                var s = decodeURIComponent(cookies[i].replace(/\+/g,  " "))
+                document.getElementById("div-Ck").innerHTML += i + '. ' + s + '<br/>'
+            }
+        }
+
+        function showAll() {
+            document.getElementById("div-LS").innerHTML = "<br/>"
+            document.getElementById("div-Ck").innerHTML = "<br/>"
+            showAll_LS()
+            showAll_Ck()
+        }
+
+        // main tests  -----------------------------------------------------    
+        function testSave() {
+            var key = document.getElementById("key").value
+            var val = {
+                nam : document.getElementById("value").value
+            }
+            if (document.getElementById("conly").checked){
+                cookj(key, val, true)
+            }else{
+                cookj(key, val)
+            }
+        }
+
+        function testDelete() {
+            var key = document.getElementById("key").value
+            cookj(key, null)
+        }
+
+        function testDelAll() {
+            cookj('NULL')
+        }
+    </script>
+</head>
+
+<body onload="showAll()">
+    <!-- by usual way -->
+    USUAL: key = <b>tst1</b>, 
+    <br/> value= <input type="text" id="tst" id="value" />
+    <br/>
+    <input type=button value="Save as LS" onClick="saveL()" /> &nbsp
+    <input type=button value="Save as Cookie" onClick="saveC()" />
+    <hr/>
+
+    <!-- by cookj -->
+    COOKJ: 
+    <br/> key  = <input type="text" id="key" />
+    <br/> value=<input type="text" id="value" />
+    <br/> ( saved JSON = <b><label id="rez"/></b> )
+    <br/> <input type="checkbox" id = "conly">Cookie only<Br>
+    
+    <br/>
+    <input type=button value="Save" onClick="testSave(); showAll(); readLast();" />
+    &nbsp;
+    <input type=button value="Delete" onClick="testDelete(); showAll();" />
+    &nbsp;
+    <input type=button value="Delete All" onClick="testDelAll(); showAll();" />
+    
+    <hr/>
+    -- all LS's    -- 
+    <div id="div-LS" style="word-break: break-all; white-space: nowrap; font-size: x-small;"><br/></div>
+    <hr/>
+    -- all Cookies (decoded) -- 
+    <div id="div-Ck" style="word-break: break-all; white-space: nowrap; font-size: x-small;"><br/></div>
+    <hr/>
+</body>
+
+</html>

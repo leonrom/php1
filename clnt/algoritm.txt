@@ -1,0 +1,30 @@
+    Initialisation on blog
+01 JS: read main cookie (MC)
+02 JS: if not preseted set MC = 0         
+
+
+    Initialisation on first page
+01 JS: read main cookie (MC)
+02 JS: if MC == 0
+     - tell about using of cookies
+     - if user agree then
+        - set as MC = fingerJS()
+        - save as cookie
+03 JS: send MC and type='start' and params='' to PHP
+04 JS: on return 
+     - show Name and statctic (must contain N_visit and N_visit_anonymous) .
+     - if (Name='Anonymous') and (N_visit_anonymous > N_visit_anonymous_max) 
+        - N_visit_anonymous = 0
+        - ask of user's name and/or of full registration
+        - if user set their name or full registration - send to PHP MC, type='name' , params=<user's name; regestered e-mail; registered (caсhed)psw>
+
+    Work
+11. JS: for every entrance on page  send MC and type='entrance', params=<page Header> to PHP
+12. JS: for every begin-play of misic send MC and type='play', params=<name of musik> to PHP
+13. JS: for every finish-play of misic send MC and type='play', params=<name of musik and %%> to PHP
+
+0 PHP: if (MC == 0) return
+1 PHP: find MC in database
+2 PHP: if not preset - create records for MC
+3 PHP: fill records of the visit for MC according of type and params
+4 PHP: if type='start' return Name ('Anonymous' or from DB) and last pages statistic

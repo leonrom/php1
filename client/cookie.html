@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="js/swfobject-2.2.min.js"></script>
+    <script type="text/javascript" src="http://www.java.com/js/dtjava.js"></script>
+    <script type="text/javascript" src="js/evercookie.js"></script>
+    <title>evercookie - virtually irrevocable persistent cookies</title>
+
+</head>
+
+<body>
+    <script>
+        function loadText() {
+            if (window.localStorage) {
+
+                /// list all keys from object
+                var keys = Object.keys(window.localStorage);
+
+                var i = keys.length;
+                if (i == 0){
+                    try {
+  window.localStorage.setItem('ключ', 'значение');
+} catch (e) {
+  if (e == window.QUOTA_EXCEEDED_ERR) {
+   alert('Превышен лимит');
+  }else{
+      alert('e=' + e);
+  }
+}
+                }
+                while (i-- > 0) {
+                    var key = keys[i];
+                    console.log(key + "--------theiiiiiii");
+                    var z = window.localStorage.getItem(key);
+                    console.log(z + "--------you keep me satisfied");
+                }
+            }
+            else {
+                alert("Your Browser does not support LocalStorage.");
+            }
+        }
+
+        loadText()
+
+        var val = '' + Math.floor(Math.random() * 1000);
+        var ec = new evercookie({
+            /* Options */
+        });
+
+        getC(0);
+        //setTimeout(getC, 500, 1);
+
+        function getC(dont) {
+            ec.get("uid", function(best, all) {
+                document.getElementById('idtag').innerHTML = best;
+                var txt = document.getElementById('cookies');
+                txt.innerHTML = '';
+                for (var item in all)
+                    txt.innerHTML += item + ' mechanism: ' + (val == all[item] ? '<b>' + all[item] + '</b>' : all[item]) + '<br>';
+                if (!dont)
+                    getC(1);
+            }, dont);
+        }
+    </script>
+
+    <b>Cookie found:</b> <i>uid</i> = <span id='idtag'>currently not set</span>
+    <br/>
+    <input type=button value="Click to create an evercookie" onClick="document.getElementById('idtag').innerHTML = '*creating*'; document.getElementById('cookies').innerHTML = ''; ec.set('uid', val); setTimeout(getC, 1000, 1); ">
+
+    <div id='cookies'></div>
+    Now, try deleting this "uid" cookie anywhere possible, then
+    <br/>
+    <input type=button value="Click to rediscover cookies" onClick="document.getElementById('idtag').innerHTML = '*checking*'; document.getElementById('cookies').innerHTML = ''; setTimeout(getC, 300);">
+    <br/> or
+    <br/>
+    <input type=button value="Click to rediscover cookies WITHOUT reactivating deleted cookies" onClick="document.getElementById('idtag').innerHTML = '*checking*'; document.getElementById('cookies').innerHTML = ''; setTimeout(getC, 300, 1);">
+    <br/>
+
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-6127617-2");
+            pageTracker._trackPageview();
+        }
+        catch (err) {}
+    </script>
+</body>
+
+</html>

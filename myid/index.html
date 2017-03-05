@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test getmyid() /</title>
+    <script src="ext/fingerprint2.js"></script>
+    <script src="js/getmyid.js"></script>
+    <script src="js/lscook.js"></script>
+    <script>
+        var getMyId
+        function showHint(str) {
+            getMyId.act()
+        }
+        /* global GetMyId */
+        function loadPage() {
+            getMyId = new GetMyId('tagUserName', './php/gethint.php', true)
+//            getMyId = new GetMyId('tagUserName', 'http://romleon.rf.gd/jsonp.php', true) // No 'Access-Control-Allow-Origin' header is present on the requested resource
+        }
+    </script>
+</head>
+
+<body onload="loadPage()">
+
+    <p><b>Start typing a name in the input field below:</b></p>
+    <form>
+        First name: <input type="text" onkeyup="showHint(this.value)">
+    </form>
+    <p><span id="txtHint"></span></p>
+</body>
+
+</html>
